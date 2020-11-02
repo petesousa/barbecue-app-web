@@ -20,6 +20,7 @@ interface SignInCredentials {
 interface AuthContextWrapper {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextWrapper>({} as AuthContextWrapper);
@@ -49,8 +50,16 @@ const AuthProvider: React.FC = ({ children }) => {
 
     setData({ token, user });
   }, []);
+
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@BarbecueApp:token');
+    localStorage.removeItem('@BarbecueApp:user');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

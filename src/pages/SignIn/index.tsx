@@ -9,7 +9,7 @@ import logoImg from '../../assets/logo-trinca.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content } from './styles';
