@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 
 import api from '../service/api';
 
@@ -22,11 +22,9 @@ interface AuthContextWrapper {
   signIn(credentials: SignInCredentials): Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextWrapper>(
-  {} as AuthContextWrapper,
-);
+const AuthContext = createContext<AuthContextWrapper>({} as AuthContextWrapper);
 
-export const AuthProvider: React.FC = ({ children }) => {
+const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@BarbecueApp:token');
     const user = localStorage.getItem('@BarbecueApp:user');
@@ -57,3 +55,15 @@ export const AuthProvider: React.FC = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+function useAuth(): AuthContextWrapper {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
+}
+
+export { AuthProvider, useAuth };
