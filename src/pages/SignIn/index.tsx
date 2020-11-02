@@ -14,15 +14,23 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content } from './styles';
 
+interface SignInFormData {
+  username: string;
+  password: string;
+}
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
+
+  console.log(user);
 
   const handleSubmit = useCallback(
-    async (data: object) => {
+    async (data: SignInFormData) => {
       try {
         formRef.current?.setErrors({});
+
         const schema = Yup.object().shape({
           username: Yup.string()
             .required('Ei, precisamos saber seu username :)')
@@ -39,7 +47,7 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn();
+        signIn({ username: data.username, password: data.password });
       } catch (err) {
         const errors = getValidationErrors(err);
         formRef.current?.setErrors(errors);
