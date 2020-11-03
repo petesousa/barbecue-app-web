@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Header from './Header';
+import SideBar from './SideBar';
 import Calendar from './Calendar';
-import { Container, Body, BarbecueDetails } from './styles';
+import { Container, Body } from './styles';
 
 const Home: React.FC = () => {
+  const [date, setDate] = useState<Date>(new Date());
+
   return (
     <Container>
-      <Header />
       <Body>
-        <BarbecueDetails />
-        <Calendar />
+        <SideBar date={date} setDate={setDate} />
+        <Calendar setDate={setDate} />
       </Body>
     </Container>
   );

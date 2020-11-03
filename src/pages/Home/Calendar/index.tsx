@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import api from '../../../service/api';
+import BarbecuePostIt from './BarbecuePostIt';
 
 import Controller from './Controller';
 
@@ -29,11 +30,13 @@ interface CalendarDay {
   isDateAvailable: boolean;
 }
 
-const Calendar: React.FC = () => {
+interface Props {
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
+}
+
+const Calendar: React.FC<Props> = ({ setDate }) => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
-
-  console.log(month, year);
 
   const [monthDays, setMonthDays] = useState<CalendarDay[]>([]);
 
@@ -41,7 +44,6 @@ const Calendar: React.FC = () => {
     const getMonthCalendar = await api.get(
       `/barbecue?month=${month}&year=${year}`,
     );
-    console.log(getMonthCalendar);
     setMonthDays(getMonthCalendar.data);
   }, [month, year]);
 
@@ -60,18 +62,7 @@ const Calendar: React.FC = () => {
       <CalendarWrapper>
         {monthDays.map(day => {
           return day.barbecue ? (
-            <li>
-              <div>{day.barbecue?.date}</div>
-              <div>{day.barbecue?.title}</div>
-              <div>
-                {`${day.barbecue?.rsvp?.yes} de ${
-                  day.barbecue?.rsvp?.yes + day.barbecue?.rsvp?.no
-                }`}
-              </div>
-              <div>
-                {`${day.barbecue?.priceRange?.from} - ${day.barbecue?.priceRange?.to}`}
-              </div>
-            </li>
+            <BarbecuePostIt barbecue={day.barbecue} setDate={setDate} />
           ) : (
             <li>{day.isDateAvailable ? 'disponível' : 'no passado'}</li>
           );
