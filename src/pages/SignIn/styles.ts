@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 import signInBackgroundImage from '../../assets/barbecue-image-3.png';
 
 export const Container = styled.div`
@@ -38,7 +37,6 @@ export const Content = styled.div`
   }
 
   form {
-    margin: 28px 0;
     width: 340px;
     text-align: center;
 
