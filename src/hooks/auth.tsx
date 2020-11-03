@@ -2,14 +2,19 @@ import React, { createContext, useCallback, useContext, useState } from 'react';
 
 import api from '../service/api';
 
+interface User {
+  id: string;
+  username: string;
+}
+
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
 }
 
 interface SignInResponseWrapper {
   token: string;
-  user: object;
+  user: User;
 }
 
 interface SignInCredentials {
@@ -18,7 +23,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextWrapper {
-  user: object;
+  user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -31,6 +36,8 @@ const AuthProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem('@BarbecueApp:user');
 
     if (token && user) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+
       return { token, user: JSON.parse(user) };
     }
 
