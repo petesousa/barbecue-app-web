@@ -1,4 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useCallback, useEffect, useState } from 'react';
+
+import { addHours } from 'date-fns';
 
 import api from '../../../service/api';
 import BarbecuePostIt from './BarbecuePostIt';
@@ -61,11 +66,20 @@ const Calendar: React.FC<Props> = ({ setDate }) => {
       />
       <CalendarWrapper>
         {monthDays.map(day => {
-          return day.barbecue ? (
-            <BarbecuePostIt barbecue={day.barbecue} setDate={setDate} />
-          ) : (
-            <li>{day.isDateAvailable ? 'disponível' : 'no passado'}</li>
-          );
+          if (day.barbecue) {
+            return <BarbecuePostIt barbecue={day.barbecue} setDate={setDate} />;
+          }
+
+          if (day.isDateAvailable) {
+            const dateString = addHours(new Date(year, month, day.day), 3);
+            return (
+              <li onClick={() => setDate(dateString)}>
+                {`${day.day}/${month}/${year}`}
+              </li>
+            );
+          }
+
+          return <li>{`${day.day}/${month}/${year}`}</li>;
         })}
       </CalendarWrapper>
     </Container>

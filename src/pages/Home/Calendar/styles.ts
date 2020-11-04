@@ -10,7 +10,7 @@ export const CalendarWrapper = styled.ul`
   flex: 1;
 
   height: 100%;
-  padding: 14px;
+  padding-bottom: 28px;
 
   display: grid;
   grid-template-columns: repeat(7, 1fr);

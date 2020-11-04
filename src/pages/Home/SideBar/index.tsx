@@ -1,6 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import api from '../../../service/api';
-import UserBar from './UserBar';
+import React from 'react';
 
 import { Container } from './styles';
 import BarbecueDetails from './BarbecueDetails';
@@ -13,8 +11,6 @@ interface Props {
 const SideBar: React.FC<Props> = ({ date, setDate }) => {
   return (
     <Container>
-      <UserBar />
-
       <BarbecueDetails date={date} setDate={setDate} />
     </Container>
   );

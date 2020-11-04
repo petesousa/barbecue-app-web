@@ -2,11 +2,13 @@ import React, { SetStateAction } from 'react';
 import { FaCloudMeatball, FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import { addHours } from 'date-fns';
 import { number } from 'yup';
+import { FiUserCheck } from 'react-icons/fi';
 import LoggedInUserRSVP from './LoggedInUserRSVP';
 import OtherUsers from './OtherUsers';
 import RSVPList from './RSVPList';
 
 import { Container, PriceDetails } from './styles';
+import LoggedInUserCreateRSVP from './LoggedInUserCreateRSVP';
 
 interface BarbecueRSVPDetailsDTO {
   id: string;
@@ -71,14 +73,7 @@ const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh, setDate }) => {
   return (
     <Container>
       <h1>{barbecue.title}</h1>
-      <h3>
-        {`${date.toLocaleDateString('pt-BR', {
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric',
-          weekday: 'short',
-        })}, às ${barbecue.hour}h`}
-      </h3>
+      <h3>{`${date.toLocaleDateString('pt-BR')}, às ${barbecue.hour}h`}</h3>
       <h4>{`Organizado por ${barbecue.organizer}`}</h4>
       <p>{barbecue.description}</p>
 
@@ -104,9 +99,14 @@ const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh, setDate }) => {
             {`R$${barbecue.rsvp?.budgetProgress?.paid} de R$${barbecue.rsvp?.budgetProgress?.confirmed} arrecadados`}
           </div>
 
-          {barbecue.rsvp?.loggedInUserRSVP && (
+          {barbecue.rsvp?.loggedInUserRSVP ? (
             <LoggedInUserRSVP
               userRSVP={barbecue.rsvp.loggedInUserRSVP}
+              handleRefresh={handleRefresh}
+            />
+          ) : (
+            <LoggedInUserCreateRSVP
+              barbecueId={barbecue.id}
               handleRefresh={handleRefresh}
             />
           )}

@@ -6,8 +6,10 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100vh;
 
-  background: url(${signInBackgroundImage}) no-repeat center;
-  background-size: cover;
+  /* background: url(${signInBackgroundImage}) no-repeat center;
+  background-size: cover; */
+
+  background: #eee;
 `;
 
 export const Body = styled.div`

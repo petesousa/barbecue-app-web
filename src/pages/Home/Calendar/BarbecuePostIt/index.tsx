@@ -29,9 +29,11 @@ interface Props {
 }
 
 const BarbecuePostIt: React.FC<Props> = ({ barbecue, setDate }) => {
+  const date = addHours(new Date(barbecue.date), 3);
+
   return (
-    <Container onClick={() => setDate(addHours(new Date(barbecue.date), 3))}>
-      <PostItHeader>{barbecue.date}</PostItHeader>
+    <Container onClick={() => setDate(date)}>
+      <PostItHeader>{`${date.toLocaleDateString('pt-BR')}`}</PostItHeader>
       <PostItBody>{barbecue.title}</PostItBody>
       <PostItFooter>
         <div>
