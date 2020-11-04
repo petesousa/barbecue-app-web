@@ -25,7 +25,7 @@ interface Props {
 }
 
 const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
-  const [isGoing, setIsGoing] = useState(userRSVP.rsvp);
+  const [isGoing] = useState(userRSVP.rsvp);
   const [willEat, setWillEat] = useState(userRSVP.willEat);
   const [willDrink, setWillDrink] = useState(userRSVP.willDrink);
   const [hasPaid, setHasPaid] = useState(userRSVP.hasPaid);
@@ -57,7 +57,7 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
           'Somente o organizador do churrasco pode alterar essa informação',
       });
     }
-  }, [hasPaid, userRSVP.id, handleRefresh]);
+  }, [hasPaid, userRSVP.id, handleRefresh, addToast]);
 
   return (
     <Container>

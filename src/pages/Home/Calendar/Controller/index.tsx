@@ -1,32 +1,27 @@
-import React, { Dispatch, SetStateAction, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { FiArrowLeftCircle, FiArrowRightCircle } from 'react-icons/fi';
+import { useDate } from '../../../../hooks/date';
 import { Container } from './styles';
 
-interface Props {
-  month: number;
-  year: number;
-  setMonth: React.Dispatch<SetStateAction<number>>;
-  setYear: React.Dispatch<SetStateAction<number>>;
-}
+const Controller: React.FC = () => {
+  const { content, setDisplayMonth } = useDate();
+  const { month, year } = content;
 
-const Controller: React.FC<Props> = ({ month, year, setMonth, setYear }) => {
   const handleGoBack = useCallback(() => {
     if (month >= 1) {
-      setMonth(month - 1);
+      setDisplayMonth(month - 1, year);
     } else {
-      setYear(year - 1);
-      setMonth(12);
+      setDisplayMonth(12, year - 1);
     }
-  }, [month, setMonth, year, setYear]);
+  }, [month, year, setDisplayMonth]);
 
   const handleGoForth = useCallback(() => {
     if (month < 12) {
-      setMonth(month + 1);
+      setDisplayMonth(month + 1, year);
     } else {
-      setYear(year + 1);
-      setMonth(1);
+      setDisplayMonth(1, year + 1);
     }
-  }, [month, setMonth, year, setYear]);
+  }, [month, year, setDisplayMonth]);
 
   return (
     <Container>

@@ -1,18 +1,12 @@
 import React from 'react';
-import api from '../../../service/api';
 
 import { Container } from './styles';
 import BarbecueDetails from './BarbecueDetails';
 
-interface Props {
-  date: Date;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
-}
-
-const SideBar: React.FC<Props> = ({ date, setDate }) => {
+const SideBar: React.FC = () => {
   return (
     <Container>
-      <BarbecueDetails date={date} setDate={setDate} />
+      <BarbecueDetails />
     </Container>
   );
 };

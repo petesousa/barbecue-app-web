@@ -55,10 +55,9 @@ interface BarbecueDetailsWrapper {
 interface Props {
   barbecue: BarbecueDetailsWrapper;
   handleRefresh(): void;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh, setDate }) => {
+const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh }) => {
   const date = addHours(new Date(barbecue.date), 3);
 
   let totalInvited = 0;

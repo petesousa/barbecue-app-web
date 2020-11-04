@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import { FiDollarSign, FiUser, FiUserCheck } from 'react-icons/fi';
+import { FiUserCheck } from 'react-icons/fi';
 import { addHours } from 'date-fns';
 
 import { Container, PostItHeader, PostItBody, PostItFooter } from './styles';
+import { useDate } from '../../../../hooks/date';
 
 interface Barbecue {
   id: string;
@@ -25,14 +26,15 @@ interface Barbecue {
 
 interface Props {
   barbecue: Barbecue;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-const BarbecuePostIt: React.FC<Props> = ({ barbecue, setDate }) => {
+const BarbecuePostIt: React.FC<Props> = ({ barbecue }) => {
   const date = addHours(new Date(barbecue.date), 3);
 
+  const { setDisplayDate } = useDate();
+
   return (
-    <Container onClick={() => setDate(date)}>
+    <Container onClick={() => setDisplayDate(date)}>
       <PostItHeader>{`${date.toLocaleDateString('pt-BR')}`}</PostItHeader>
       <PostItBody>{barbecue.title}</PostItBody>
       <PostItFooter>

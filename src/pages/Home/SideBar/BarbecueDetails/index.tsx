@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDate } from '../../../../hooks/date';
 import api from '../../../../service/api';
 import Barbecue from './Barbecue';
 
@@ -48,32 +49,29 @@ interface BarbecueDetailsWrapper {
   isOrganizerLoggedIn: boolean;
 }
 
-interface Props {
-  date: Date;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
-}
-
-const BarbecueDetails: React.FC<Props> = ({ date, setDate }) => {
+const BarbecueDetails: React.FC = () => {
   const [barbecue, setBarbecue] = useState<BarbecueDetailsWrapper | undefined>(
     undefined,
   );
 
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = String(date.getFullYear());
+  const { content } = useDate();
+
+  const month = String(content.date.getMonth() + 1).padStart(2, '0');
+  const day = String(content.date.getDate()).padStart(2, '0');
+  const year = String(content.date.getFullYear());
   const dateString = `${year}-${month}-${day}`;
 
   const getBarbecueDetails = useCallback(async () => {
     const getDetails = await api.get(`/barbecue/${dateString}`);
     // const getDetails = await api.get(`/barbecue/2020-11-30`);
-    console.log(getDetails);
+    // console.log(getDetails);
     setBarbecue(getDetails.data);
   }, [dateString]);
 
   const handleRefresh = useCallback(async () => {
     const getDetails = await api.get(`/barbecue/${dateString}`);
     // const getDetails = await api.get(`/barbecue/2020-11-30`);
-    console.log(getDetails);
+    // console.log(getDetails);
     setBarbecue(getDetails.data);
   }, [dateString]);
 
@@ -84,11 +82,7 @@ const BarbecueDetails: React.FC<Props> = ({ date, setDate }) => {
   return (
     <Container>
       {barbecue && (
-        <Barbecue
-          barbecue={barbecue}
-          handleRefresh={handleRefresh}
-          setDate={setDate}
-        />
+        <Barbecue barbecue={barbecue} handleRefresh={handleRefresh} />
       )}
     </Container>
   );

@@ -24,7 +24,7 @@ const RSVPList: React.FC<Props> = ({ rsvpList }) => {
     <Container>
       <h3>Confirmados</h3>
       {rsvpList.map(rsvp => {
-        return <h5>{rsvp.user.username}</h5>;
+        return <h5 key={rsvp.id}>{rsvp.user.username}</h5>;
       })}
     </Container>
   );

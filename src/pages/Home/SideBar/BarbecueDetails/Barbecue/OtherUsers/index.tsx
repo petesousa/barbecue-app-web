@@ -16,7 +16,7 @@ const OtherUsers: React.FC<Props> = ({ otherUsers }) => {
     <Container>
       <h3>Outros convidados</h3>
       {otherUsers.map(user => {
-        return <h5>{user.username}</h5>;
+        return <h5 key={user.userId}>{user.username}</h5>;
       })}
     </Container>
   );

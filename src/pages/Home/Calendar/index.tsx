@@ -3,14 +3,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { addHours } from 'date-fns';
-
 import api from '../../../service/api';
 import BarbecuePostIt from './BarbecuePostIt';
 
 import Controller from './Controller';
 
 import { Container, CalendarWrapper } from './styles';
+import { useDate } from '../../../hooks/date';
 
 interface Barbecue {
   id: string;
@@ -35,22 +34,17 @@ interface CalendarDay {
   isDateAvailable: boolean;
 }
 
-interface Props {
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
-}
-
-const Calendar: React.FC<Props> = ({ setDate }) => {
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [year, setYear] = useState(new Date().getFullYear());
-
+const Calendar: React.FC = () => {
+  const { content, setDisplayDate } = useDate();
+  const { month, year } = content;
   const [monthDays, setMonthDays] = useState<CalendarDay[]>([]);
 
   const getMonthBarbecue = useCallback(async () => {
     const getMonthCalendar = await api.get(
-      `/barbecue?month=${month}&year=${year}`,
+      `/barbecue?month=${content.month}&year=${content.year}`,
     );
     setMonthDays(getMonthCalendar.data);
-  }, [month, year]);
+  }, [content]);
 
   useEffect(() => {
     getMonthBarbecue();
@@ -58,28 +52,25 @@ const Calendar: React.FC<Props> = ({ setDate }) => {
 
   return (
     <Container>
-      <Controller
-        month={month}
-        setMonth={setMonth}
-        year={year}
-        setYear={setYear}
-      />
+      <Controller />
       <CalendarWrapper>
         {monthDays.map(day => {
           if (day.barbecue) {
-            return <BarbecuePostIt barbecue={day.barbecue} setDate={setDate} />;
+            return (
+              <BarbecuePostIt key={day.barbecue.id} barbecue={day.barbecue} />
+            );
           }
 
           if (day.isDateAvailable) {
-            const dateString = addHours(new Date(year, month, day.day), 3);
+            const dateString = new Date(year, month, day.day);
             return (
-              <li onClick={() => setDate(dateString)}>
+              <li key={day.day} onClick={() => setDisplayDate(dateString)}>
                 {`${day.day}/${month}/${year}`}
               </li>
             );
           }
 
-          return <li>{`${day.day}/${month}/${year}`}</li>;
+          return <li key={day.day}>{`${day.day}/${month}/${year}`}</li>;
         })}
       </CalendarWrapper>
     </Container>
