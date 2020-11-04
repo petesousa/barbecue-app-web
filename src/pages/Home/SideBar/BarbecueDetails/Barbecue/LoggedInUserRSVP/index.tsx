@@ -1,4 +1,4 @@
-import React, { SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FaCocktail, FaDrumstickBite, FaUserTimes } from 'react-icons/fa';
 import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
 import { useToast } from '../../../../../../hooks/toast';

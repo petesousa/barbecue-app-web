@@ -1,8 +1,6 @@
-import React, { SetStateAction } from 'react';
-import { FaCloudMeatball, FaCocktail, FaDrumstickBite } from 'react-icons/fa';
+import React from 'react';
+import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import { addHours } from 'date-fns';
-import { number } from 'yup';
-import { FiUserCheck } from 'react-icons/fi';
 import LoggedInUserRSVP from './LoggedInUserRSVP';
 import OtherUsers from './OtherUsers';
 import RSVPList from './RSVPList';
