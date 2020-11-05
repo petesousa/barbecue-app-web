@@ -109,7 +109,10 @@ const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh }) => {
           )}
 
           {barbecue.rsvp?.rsvpList && (
-            <RSVPList rsvpList={barbecue.rsvp.rsvpList} />
+            <RSVPList
+              rsvpList={barbecue.rsvp.rsvpList}
+              handleRefresh={handleRefresh}
+            />
           )}
 
           {barbecue.rsvp?.otherUsers && (

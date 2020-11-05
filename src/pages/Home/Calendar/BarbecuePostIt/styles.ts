@@ -1,8 +1,13 @@
+import { transparentize } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.li`
   background: #fff;
-
+  background: #d7f171;
+  background: ${transparentize(0.1, '#d7f171')};
+  &:hover {
+    background: #d7f171;
+  }
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;

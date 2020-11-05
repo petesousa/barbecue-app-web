@@ -1,5 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { FaCocktail, FaDrumstickBite, FaUserTimes } from 'react-icons/fa';
+import {
+  FaCocktail,
+  FaDrumstickBite,
+  FaTimes,
+  FaUserTimes,
+} from 'react-icons/fa';
 import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
 import { useToast } from '../../../../../../hooks/toast';
 import api from '../../../../../../service/api';
@@ -32,6 +37,11 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
 
   const { addToast } = useToast();
 
+  const handleCancelRSVP = useCallback(async () => {
+    await api.delete(`/barbecue-rsvp/${userRSVP.id}`);
+    handleRefresh();
+  }, [willEat, userRSVP.id, handleRefresh]);
+
   const handleChangeRSVPWillEat = useCallback(async () => {
     await api.put(`/barbecue-rsvp/${userRSVP.id}/meal`);
     setWillEat(!willEat);
@@ -61,58 +71,79 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
 
   return (
     <Container>
-      <h5>
-        {isGoing ? (
+      {isGoing && (
+        <div>
           <FiUserCheck size={36} color="#20a020" />
-        ) : (
-          <FaUserTimes size={36} color="#ddd" />
-        )}
-      </h5>
-      <h5>
-        {willEat ? (
+          <h5>
+            <span>Você vai</span>
+            <span>
+              <button type="button" onClick={handleCancelRSVP}>
+                não vou mais
+              </button>
+            </span>
+          </h5>
+        </div>
+      )}
+      {willEat ? (
+        <div>
           <FaDrumstickBite
             size={36}
             color="#ffcc00"
             onClick={handleChangeRSVPWillEat}
           />
-        ) : (
+          <h5>Vai comer?</h5>
+        </div>
+      ) : (
+        <div>
           <FaDrumstickBite
             size={36}
             color="#ddd"
             onClick={handleChangeRSVPWillEat}
           />
-        )}
-      </h5>
-      <h5>
-        {willDrink ? (
+
+          <h5>Vai comer?</h5>
+        </div>
+      )}
+      {willDrink ? (
+        <div>
           <FaCocktail
             size={36}
             color="#ff5500"
             onClick={handleChangeRSVPWillDrink}
           />
-        ) : (
+
+          <h5>Vai beber?</h5>
+        </div>
+      ) : (
+        <div>
           <FaCocktail
             size={36}
             color="#ddd"
             onClick={handleChangeRSVPWillDrink}
           />
-        )}
-      </h5>
-      <h5>
-        {hasPaid ? (
+
+          <h5>Vai beber?</h5>
+        </div>
+      )}
+      {hasPaid ? (
+        <div>
           <FiDollarSign
             size={36}
             color="#20a020"
             onClick={handleChangeRSVPHasPaid}
           />
-        ) : (
+          <h5>Você já pagou!</h5>
+        </div>
+      ) : (
+        <div>
           <FiDollarSign
             size={36}
             color="#ddd"
             onClick={handleChangeRSVPHasPaid}
           />
-        )}
-      </h5>
+          <h5>Você ainda não pagou :B</h5>
+        </div>
+      )}
     </Container>
   );
 };

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
+import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
+import { useToast } from '../../../../../../hooks/toast';
+import api from '../../../../../../service/api';
 
 import { Container } from './styles';
 
@@ -17,14 +21,65 @@ interface BarbecueRSVPDetailsDTO {
 
 interface Props {
   rsvpList: BarbecueRSVPDetailsDTO[];
+  handleRefresh(): void;
 }
 
-const RSVPList: React.FC<Props> = ({ rsvpList }) => {
+const RSVPList: React.FC<Props> = ({ rsvpList, handleRefresh }) => {
+  const { addToast } = useToast();
+  const handleChangeRSVPHasPaid = useCallback(
+    async (id: string) => {
+      try {
+        await api.put(`/barbecue-rsvp/${id}/paid`);
+
+        handleRefresh();
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Falha na operação',
+          description:
+            'Somente o organizador do churrasco pode alterar essa informação',
+        });
+      }
+    },
+    [handleRefresh, addToast],
+  );
+
   return (
     <Container>
       <h3>Confirmados</h3>
       {rsvpList.map(rsvp => {
-        return <h5 key={rsvp.id}>{rsvp.user.username}</h5>;
+        return (
+          <div key={rsvp.id}>
+            <h4>{rsvp.user.username}</h4>
+            <span>
+              <FiUserCheck size={24} color="#20a020" />
+            </span>
+            <span>
+              {rsvp.willEat && <FaDrumstickBite size={24} color="#ffcc00" />}
+              {!rsvp.willEat && <FaDrumstickBite size={24} color="#eee" />}
+            </span>
+            <span>
+              {rsvp.willDrink && <FaCocktail size={24} color="#ff5500" />}
+              {!rsvp.willDrink && <FaCocktail size={24} color="#eee" />}
+            </span>
+            <span>
+              {rsvp.hasPaid && (
+                <FiDollarSign
+                  size={24}
+                  color="#20a020"
+                  onClick={() => handleChangeRSVPHasPaid(rsvp.id)}
+                />
+              )}
+              {!rsvp.hasPaid && (
+                <FiDollarSign
+                  size={24}
+                  color="#eee"
+                  onClick={() => handleChangeRSVPHasPaid(rsvp.id)}
+                />
+              )}
+            </span>
+          </div>
+        );
       })}
     </Container>
   );

@@ -8,7 +8,7 @@ const Controller: React.FC = () => {
   const { month, year } = content;
 
   const handleGoBack = useCallback(() => {
-    if (month >= 1) {
+    if (month > 1) {
       setDisplayMonth(month - 1, year);
     } else {
       setDisplayMonth(12, year - 1);

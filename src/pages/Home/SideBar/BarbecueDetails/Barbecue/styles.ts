@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   /* background: orange; */
-  background: #fff;
+  background: #454e5e;
+  color: #fff;
   padding: 12px;
 
   h2,

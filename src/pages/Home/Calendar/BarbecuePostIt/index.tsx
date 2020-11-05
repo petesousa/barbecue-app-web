@@ -40,7 +40,7 @@ const BarbecuePostIt: React.FC<Props> = ({ barbecue }) => {
       <PostItFooter>
         <div>
           <FiUserCheck size={14} />
-          {`${barbecue.rsvp?.yes} de ${barbecue.rsvp?.yes + barbecue.rsvp?.no}`}
+          {`${barbecue.rsvp?.yes}`}
         </div>
         <div>
           {`$${barbecue.priceRange?.from} - $${barbecue.priceRange?.to}`}

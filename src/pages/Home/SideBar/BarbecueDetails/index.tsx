@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useAuth } from '../../../../hooks/auth';
 import { useDate } from '../../../../hooks/date';
 import api from '../../../../service/api';
+import CreateBarbecueForm from '../../../../widgets/CreateBarbecueForm';
 import Barbecue from './Barbecue';
 
 import { Container } from './styles';
@@ -55,6 +57,8 @@ const BarbecueDetails: React.FC = () => {
   );
 
   const { content } = useDate();
+  const { user } = useAuth();
+  console.log('bd', content);
 
   const month = String(content.date.getMonth() + 1).padStart(2, '0');
   const day = String(content.date.getDate()).padStart(2, '0');
@@ -62,16 +66,20 @@ const BarbecueDetails: React.FC = () => {
   const dateString = `${year}-${month}-${day}`;
 
   const getBarbecueDetails = useCallback(async () => {
-    const getDetails = await api.get(`/barbecue/${dateString}`);
-    // const getDetails = await api.get(`/barbecue/2020-11-30`);
-    // console.log(getDetails);
-    setBarbecue(getDetails.data);
+    try {
+      const getDetails = await api.get(`/barbecue/${dateString}`);
+      console.log(getDetails.data);
+      setBarbecue(getDetails.data);
+    } catch (err) {
+      console.log(err);
+      setBarbecue(undefined);
+    }
   }, [dateString]);
 
   const handleRefresh = useCallback(async () => {
     const getDetails = await api.get(`/barbecue/${dateString}`);
-    // const getDetails = await api.get(`/barbecue/2020-11-30`);
-    // console.log(getDetails);
+
+    console.log(getDetails);
     setBarbecue(getDetails.data);
   }, [dateString]);
 
@@ -84,6 +92,7 @@ const BarbecueDetails: React.FC = () => {
       {barbecue && (
         <Barbecue barbecue={barbecue} handleRefresh={handleRefresh} />
       )}
+      {!barbecue && <CreateBarbecueForm />}
     </Container>
   );
 };

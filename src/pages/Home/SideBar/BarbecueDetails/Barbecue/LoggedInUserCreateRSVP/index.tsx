@@ -4,7 +4,7 @@ import { FiDollarSign } from 'react-icons/fi';
 import { useToast } from '../../../../../../hooks/toast';
 import api from '../../../../../../service/api';
 
-import { Container } from './styles';
+import { Container, CreateRSVP } from './styles';
 
 interface Props {
   barbecueId: string;
@@ -41,9 +41,9 @@ const LoggedInUserCreateRSVP: React.FC<Props> = ({
 
   return (
     <Container>
-      <h5>
+      <CreateRSVP>
         <FaUserTimes size={36} color="#ddd" onClick={handleCreateRSVP} />
-      </h5>
+      </CreateRSVP>
       <h5>
         <FaDrumstickBite size={36} color="#ddd" />
       </h5>

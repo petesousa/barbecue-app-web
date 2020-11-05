@@ -1,14 +1,19 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { endOfDay } from 'date-fns/esm';
 import api from '../../../service/api';
 import BarbecuePostIt from './BarbecuePostIt';
 
 import Controller from './Controller';
+import DateAvailable from './DateAvailable';
 
-import { Container, CalendarWrapper } from './styles';
+import {
+  Container,
+  CalendarWrapper,
+  DateUnavailable,
+  WeekDay,
+  Blank,
+} from './styles';
 import { useDate } from '../../../hooks/date';
 
 interface Barbecue {
@@ -39,6 +44,10 @@ const Calendar: React.FC = () => {
   const { month, year } = content;
   const [monthDays, setMonthDays] = useState<CalendarDay[]>([]);
 
+  const dateToGet = endOfDay(new Date(year, month - 1, 1));
+  const weekDayToStart = dateToGet.getDay();
+  const blanks = Array.from({ length: 6 - weekDayToStart });
+
   const getMonthBarbecue = useCallback(async () => {
     const getMonthCalendar = await api.get(
       `/barbecue?month=${content.month}&year=${content.year}`,
@@ -54,6 +63,12 @@ const Calendar: React.FC = () => {
     <Container>
       <Controller />
       <CalendarWrapper>
+        {['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'].map(weekDay => (
+          <WeekDay>{weekDay}</WeekDay>
+        ))}
+        {blanks.map(_ => {
+          return <Blank />;
+        })}
         {monthDays.map(day => {
           if (day.barbecue) {
             return (
@@ -62,15 +77,21 @@ const Calendar: React.FC = () => {
           }
 
           if (day.isDateAvailable) {
-            const dateString = new Date(year, month, day.day);
             return (
-              <li key={day.day} onClick={() => setDisplayDate(dateString)}>
-                {`${day.day}/${month}/${year}`}
-              </li>
+              <DateAvailable
+                day={day.day}
+                month={month}
+                year={year}
+                setDisplayDate={setDisplayDate}
+              />
             );
           }
 
-          return <li key={day.day}>{`${day.day}/${month}/${year}`}</li>;
+          return (
+            <DateUnavailable key={day.day}>
+              {`${day.day}/${month}/${year}`}
+            </DateUnavailable>
+          );
         })}
       </CalendarWrapper>
     </Container>
