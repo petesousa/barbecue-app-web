@@ -54,7 +54,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@BarbecueApp:token', token);
     localStorage.setItem('@BarbecueApp:user', JSON.stringify(user));
-
+    api.defaults.headers.authorization = `Bearer ${token}`;
     setData({ token, user });
   }, []);
 
@@ -62,6 +62,7 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@BarbecueApp:token');
     localStorage.removeItem('@BarbecueApp:user');
 
+    api.defaults.headers.authorization = undefined;
     setData({} as AuthState);
   }, []);
 
