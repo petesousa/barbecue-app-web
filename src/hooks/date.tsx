@@ -23,12 +23,17 @@ const DateProvider: React.FC = ({ children }) => {
     return { date, month, year };
   });
 
-  const setDisplayDate = useCallback(date => {
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    setDateSettings({ date, month, year });
-  }, []);
+  const setDisplayDate = useCallback(
+    date => {
+      console.log(date);
+      setDateSettings({
+        date,
+        month: dateSettings.month,
+        year: dateSettings.year,
+      });
+    },
+    [dateSettings],
+  );
 
   const setDisplayMonth = useCallback(
     (month: number, year: number) => {
