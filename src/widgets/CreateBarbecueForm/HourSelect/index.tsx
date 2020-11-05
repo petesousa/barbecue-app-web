@@ -32,7 +32,7 @@ const HourSelect: React.FC<SelectProps> = ({
     items = prices;
   }
 
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({

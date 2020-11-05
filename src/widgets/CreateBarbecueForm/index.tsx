@@ -81,7 +81,7 @@ const CreateBarbecueForm: React.FC<Props> = ({ handleRefresh }) => {
         });
       }
     },
-    [addToast],
+    [addToast, content.date, handleRefresh, setDisplayMonth],
   );
 
   return (

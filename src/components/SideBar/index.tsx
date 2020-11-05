@@ -1,7 +1,7 @@
 import React from 'react';
 
+import BarbecueDetails from '../../widgets/BarbecueDetails';
 import { Container } from './styles';
-import BarbecueDetails from './BarbecueDetails';
 
 const SideBar: React.FC = () => {
   return (

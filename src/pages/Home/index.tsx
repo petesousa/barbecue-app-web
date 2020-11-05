@@ -1,8 +1,8 @@
 import React from 'react';
 
-import UserBar from './UserBar';
-import SideBar from './SideBar';
-import Calendar from './Calendar';
+import UserBar from '../../components/UserBar';
+import SideBar from '../../components/SideBar';
+import Calendar from '../../widgets/Calendar';
 import { Container, Body } from './styles';
 
 const Home: React.FC = () => {

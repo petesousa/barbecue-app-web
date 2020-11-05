@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { endOfDay } from 'date-fns/esm';
-import api from '../../../service/api';
+import api from '../../service/api';
 import BarbecuePostIt from './BarbecuePostIt';
 
 import Controller from './Controller';
@@ -14,7 +14,7 @@ import {
   WeekDay,
   Blank,
 } from './styles';
-import { useDate } from '../../../hooks/date';
+import { useDate } from '../../hooks/date';
 
 interface Barbecue {
   id: string;

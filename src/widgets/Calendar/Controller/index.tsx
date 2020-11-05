@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { FiArrowLeftCircle, FiArrowRightCircle } from 'react-icons/fi';
-import { useDate } from '../../../../hooks/date';
+import { useDate } from '../../../hooks/date';
 import { Container } from './styles';
 
 const Controller: React.FC = () => {

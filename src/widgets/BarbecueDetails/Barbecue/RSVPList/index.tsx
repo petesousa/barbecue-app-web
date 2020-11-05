@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
-import { useToast } from '../../../../../../hooks/toast';
-import api from '../../../../../../service/api';
+import { useToast } from '../../../../hooks/toast';
+import api from '../../../../service/api';
 
 import { Container, SetHasPaid } from './styles';
 
@@ -33,7 +33,7 @@ const RSVPList: React.FC<Props> = ({ rsvpList, handleRefresh }) => {
 
         handleRefresh();
       } catch (err) {
-        const { status, message } = JSON.parse(err.request.response);
+        const { message } = JSON.parse(err.request.response);
         addToast({
           type: 'error',
           title: 'Falha na operação',

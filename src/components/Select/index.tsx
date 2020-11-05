@@ -17,8 +17,7 @@ const Select: React.FC<SelectProps> = ({
   ...rest
 }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
-  const hours = [12, 15, 18, 19, 20, 21];
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({

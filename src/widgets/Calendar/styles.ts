@@ -33,7 +33,6 @@ export const DateUnavailable = styled.li`
 `;
 
 export const WeekDay = styled.li`
-  /* color: #fff; */
   text-transform: uppercase;
 
   display: flex;

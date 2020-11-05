@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import Button from '../../../../../../components/Button';
-import { useToast } from '../../../../../../hooks/toast';
-import api from '../../../../../../service/api';
+import Button from '../../../../components/Button';
+import { useToast } from '../../../../hooks/toast';
+import api from '../../../../service/api';
 
 import { Container } from './styles';
 
@@ -30,7 +30,7 @@ const LoggedInUserCreateRSVP: React.FC<Props> = ({
       });
       handleRefresh();
     } catch (err) {
-      const { status, message } = JSON.parse(err.request.response);
+      const { message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',

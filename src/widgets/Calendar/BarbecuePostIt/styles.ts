@@ -2,8 +2,6 @@ import { transparentize } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.li`
-  /* background: #fff;
-  background: #f6e4e2; */
   background: ${transparentize(0.8, '#f6e4e2')};
   border: 2px solid #f6e4e2;
   &:hover {

@@ -3,7 +3,7 @@ import { FiUserCheck } from 'react-icons/fi';
 import { addHours } from 'date-fns';
 
 import { Container, PostItHeader, PostItBody, PostItFooter } from './styles';
-import { useDate } from '../../../../hooks/date';
+import { useDate } from '../../../hooks/date';
 
 interface Barbecue {
   id: string;

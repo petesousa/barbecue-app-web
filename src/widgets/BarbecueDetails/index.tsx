@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useAuth } from '../../../../hooks/auth';
-import { useDate } from '../../../../hooks/date';
-import api from '../../../../service/api';
-import CreateBarbecueForm from '../../../../widgets/CreateBarbecueForm';
+import { useDate } from '../../hooks/date';
+import api from '../../service/api';
+import CreateBarbecueForm from '../CreateBarbecueForm';
 import Barbecue from './Barbecue';
 
 import { Container } from './styles';
@@ -66,10 +65,8 @@ const BarbecueDetails: React.FC = () => {
   const getBarbecueDetails = useCallback(async () => {
     try {
       const getDetails = await api.get(`/barbecue/${dateString}`);
-      console.log(getDetails.data);
       setBarbecue(getDetails.data);
     } catch (err) {
-      console.log(err);
       setBarbecue(undefined);
     }
   }, [dateString]);
@@ -77,7 +74,6 @@ const BarbecueDetails: React.FC = () => {
   const handleRefresh = useCallback(async () => {
     const getDetails = await api.get(`/barbecue/${dateString}`);
 
-    console.log(getDetails);
     setBarbecue(getDetails.data);
   }, [dateString]);
 

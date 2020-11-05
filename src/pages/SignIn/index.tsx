@@ -56,7 +56,7 @@ const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
         } else {
-          const { status, message } = JSON.parse(err.request.response);
+          const { message } = JSON.parse(err.request.response);
           addToast({
             type: 'error',
             title: 'Falha na operação',

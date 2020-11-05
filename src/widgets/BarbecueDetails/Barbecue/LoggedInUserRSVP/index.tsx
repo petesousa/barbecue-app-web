@@ -1,13 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import {
-  FaCocktail,
-  FaDrumstickBite,
-  FaTimes,
-  FaUserTimes,
-} from 'react-icons/fa';
+import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
-import { useToast } from '../../../../../../hooks/toast';
-import api from '../../../../../../service/api';
+import { useToast } from '../../../../hooks/toast';
+import api from '../../../../service/api';
 
 import { Container } from './styles';
 
@@ -35,8 +30,6 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const [willDrink, setWillDrink] = useState(userRSVP.willDrink);
   const [hasPaid, setHasPaid] = useState(userRSVP.hasPaid);
 
-  console.log(hasPaid);
-
   const { addToast } = useToast();
 
   const handleCancelRSVP = useCallback(async () => {
@@ -44,14 +37,14 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
       await api.delete(`/barbecue-rsvp/${userRSVP.id}`);
       handleRefresh();
     } catch (err) {
-      const { status, message } = JSON.parse(err.request.response);
+      const { message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
         description: message,
       });
     }
-  }, [willEat, userRSVP.id, handleRefresh]);
+  }, [userRSVP.id, handleRefresh, addToast]);
 
   const handleChangeRSVPWillEat = useCallback(async () => {
     try {
@@ -59,14 +52,14 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
       setWillEat(!willEat);
       handleRefresh();
     } catch (err) {
-      const { status, message } = JSON.parse(err.request.response);
+      const { message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
         description: message,
       });
     }
-  }, [willEat, userRSVP.id, handleRefresh]);
+  }, [willEat, userRSVP.id, handleRefresh, addToast]);
 
   const handleChangeRSVPWillDrink = useCallback(async () => {
     try {
@@ -74,14 +67,14 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
       setWillDrink(!willDrink);
       handleRefresh();
     } catch (err) {
-      const { status, message } = JSON.parse(err.request.response);
+      const { message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
         description: message,
       });
     }
-  }, [willDrink, userRSVP.id, handleRefresh]);
+  }, [willDrink, userRSVP.id, handleRefresh, addToast]);
 
   const handleChangeRSVPHasPaid = useCallback(async () => {
     try {
@@ -89,7 +82,7 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
       setHasPaid(!hasPaid);
       handleRefresh();
     } catch (err) {
-      const { status, message } = JSON.parse(err.request.response);
+      const { message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
@@ -170,7 +163,7 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
             color="#ddd"
             onClick={handleChangeRSVPHasPaid}
           />
-          <h5>Você ainda não pagou :B</h5>
+          <h5>Você ainda não pagou</h5>
         </div>
       )}
     </Container>

@@ -2,7 +2,6 @@ import { transparentize } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  color: #ff5500;
   color: #fff;
   background: #232129;
   border-radius: 10px;
