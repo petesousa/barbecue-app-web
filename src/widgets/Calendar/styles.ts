@@ -25,6 +25,7 @@ export const CalendarWrapper = styled.ul`
 
 export const DateUnavailable = styled.li`
   background: ${transparentize(0.9, '#414350')};
+  color: ${transparentize(0.3, '#414350')};
   cursor: not-allowed;
 
   display: flex;

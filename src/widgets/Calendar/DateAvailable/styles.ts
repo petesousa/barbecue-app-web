@@ -1,13 +1,14 @@
-import { transparentize } from 'polished';
+import { shade, transparentize } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: ${transparentize(0.8, '#b1c1d0')};
-  border: 2px solid #b1c1d0;
+  background: ${transparentize(0.8, '#D7F171')};
+  border: 2px solid ${transparentize(0.4, '#D7F171')};
   &:hover {
-    background: ${transparentize(0.4, '#b1c1d0')};
+    background: ${transparentize(0.4, '#D7F171')};
   }
   cursor: pointer;
+  color: ${shade(0.4, '#d7f171')};
 
   display: flex;
   align-items: center;
