@@ -16,3 +16,7 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const SetHasPaid = styled.span`
+  cursor: pointer;
+`;

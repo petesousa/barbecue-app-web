@@ -4,7 +4,7 @@ import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
 import { useToast } from '../../../../../../hooks/toast';
 import api from '../../../../../../service/api';
 
-import { Container } from './styles';
+import { Container, SetHasPaid } from './styles';
 
 interface BarbecueRSVPDetailsDTO {
   id: string;
@@ -62,7 +62,7 @@ const RSVPList: React.FC<Props> = ({ rsvpList, handleRefresh }) => {
               {rsvp.willDrink && <FaCocktail size={24} color="#ff5500" />}
               {!rsvp.willDrink && <FaCocktail size={24} color="#eee" />}
             </span>
-            <span>
+            <SetHasPaid>
               {rsvp.hasPaid && (
                 <FiDollarSign
                   size={24}
@@ -77,7 +77,7 @@ const RSVPList: React.FC<Props> = ({ rsvpList, handleRefresh }) => {
                   onClick={() => handleChangeRSVPHasPaid(rsvp.id)}
                 />
               )}
-            </span>
+            </SetHasPaid>
           </div>
         );
       })}

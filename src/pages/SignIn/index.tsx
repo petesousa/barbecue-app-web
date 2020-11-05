@@ -55,13 +55,14 @@ const SignIn: React.FC = () => {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
+        } else {
+          const { status, message } = JSON.parse(err.request.response);
+          addToast({
+            type: 'error',
+            title: 'Falha na operação',
+            description: message,
+          });
         }
-
-        addToast({
-          type: 'error',
-          title: 'Erro no login',
-          description: 'Não foi possível fazer login com estas credenciais :(',
-        });
       }
     },
     [signIn, addToast],

@@ -31,7 +31,7 @@ const CreateBarbecueForm: React.FC<Props> = ({ handleRefresh }) => {
   const createBarbecueFormRef = useRef<FormHandles>(null);
 
   const { addToast } = useToast();
-  const { content } = useDate();
+  const { content, setDisplayMonth } = useDate();
 
   const handleSubmit = useCallback(
     async (data: CreateBarbecueFormData) => {
@@ -64,6 +64,10 @@ const CreateBarbecueForm: React.FC<Props> = ({ handleRefresh }) => {
           description: 'Seu churras foi marcado com sucesso!',
         });
         handleRefresh();
+        setDisplayMonth(
+          content.date.getMonth() + 1,
+          content.date.getFullYear(),
+        );
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
