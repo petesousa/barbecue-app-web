@@ -7,10 +7,3 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-export const CreateRSVP = styled.h5`
-  cursor: pointer;
-  &:hover {
-    color: #eaeaea;
-  }
-`;

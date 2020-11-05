@@ -40,20 +40,47 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const { addToast } = useToast();
 
   const handleCancelRSVP = useCallback(async () => {
-    await api.delete(`/barbecue-rsvp/${userRSVP.id}`);
-    handleRefresh();
+    try {
+      await api.delete(`/barbecue-rsvp/${userRSVP.id}`);
+      handleRefresh();
+    } catch (err) {
+      const { status, message } = JSON.parse(err.request.response);
+      addToast({
+        type: 'error',
+        title: 'Falha na operação',
+        description: message,
+      });
+    }
   }, [willEat, userRSVP.id, handleRefresh]);
 
   const handleChangeRSVPWillEat = useCallback(async () => {
-    await api.put(`/barbecue-rsvp/${userRSVP.id}/meal`);
-    setWillEat(!willEat);
-    handleRefresh();
+    try {
+      await api.put(`/barbecue-rsvp/${userRSVP.id}/meal`);
+      setWillEat(!willEat);
+      handleRefresh();
+    } catch (err) {
+      const { status, message } = JSON.parse(err.request.response);
+      addToast({
+        type: 'error',
+        title: 'Falha na operação',
+        description: message,
+      });
+    }
   }, [willEat, userRSVP.id, handleRefresh]);
 
   const handleChangeRSVPWillDrink = useCallback(async () => {
-    await api.put(`/barbecue-rsvp/${userRSVP.id}/drinks`);
-    setWillDrink(!willDrink);
-    handleRefresh();
+    try {
+      await api.put(`/barbecue-rsvp/${userRSVP.id}/drinks`);
+      setWillDrink(!willDrink);
+      handleRefresh();
+    } catch (err) {
+      const { status, message } = JSON.parse(err.request.response);
+      addToast({
+        type: 'error',
+        title: 'Falha na operação',
+        description: message,
+      });
+    }
   }, [willDrink, userRSVP.id, handleRefresh]);
 
   const handleChangeRSVPHasPaid = useCallback(async () => {
@@ -62,11 +89,11 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
       setHasPaid(!hasPaid);
       handleRefresh();
     } catch (err) {
+      const { status, message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
-        description:
-          'Somente o organizador do churrasco pode alterar essa informação',
+        description: message,
       });
     }
   }, [hasPaid, userRSVP.id, handleRefresh, addToast]);

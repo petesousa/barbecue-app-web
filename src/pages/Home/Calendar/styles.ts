@@ -24,7 +24,7 @@ export const CalendarWrapper = styled.ul`
 `;
 
 export const DateUnavailable = styled.li`
-  background: ${transparentize(0.7, '#9db17c')};
+  background: ${transparentize(0.9, '#414350')};
   cursor: not-allowed;
 
   display: flex;
@@ -33,7 +33,7 @@ export const DateUnavailable = styled.li`
 `;
 
 export const WeekDay = styled.li`
-  color: #fff;
+  /* color: #fff; */
   text-transform: uppercase;
 
   display: flex;

@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
-import { FaCocktail, FaDrumstickBite, FaUserTimes } from 'react-icons/fa';
-import { FiDollarSign } from 'react-icons/fi';
+import Button from '../../../../../../components/Button';
 import { useToast } from '../../../../../../hooks/toast';
 import api from '../../../../../../service/api';
 
-import { Container, CreateRSVP } from './styles';
+import { Container } from './styles';
 
 interface Props {
   barbecueId: string;
@@ -31,28 +30,18 @@ const LoggedInUserCreateRSVP: React.FC<Props> = ({
       });
       handleRefresh();
     } catch (err) {
+      const { status, message } = JSON.parse(err.request.response);
       addToast({
         type: 'error',
         title: 'Falha na operação',
-        description: 'Não foi possível confirmar sua presença',
+        description: message,
       });
     }
   }, [barbecueId, addToast, handleRefresh]);
 
   return (
     <Container>
-      <CreateRSVP>
-        <FaUserTimes size={36} color="#ddd" onClick={handleCreateRSVP} />
-      </CreateRSVP>
-      <h5>
-        <FaDrumstickBite size={36} color="#ddd" />
-      </h5>
-      <h5>
-        <FaCocktail size={36} color="#ddd" />
-      </h5>
-      <h5>
-        <FiDollarSign size={36} color="#ddd" />
-      </h5>
+      <Button onClick={handleCreateRSVP}>Confirmar Presença</Button>
     </Container>
   );
 };

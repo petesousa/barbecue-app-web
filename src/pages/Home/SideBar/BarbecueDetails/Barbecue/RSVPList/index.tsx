@@ -33,11 +33,11 @@ const RSVPList: React.FC<Props> = ({ rsvpList, handleRefresh }) => {
 
         handleRefresh();
       } catch (err) {
+        const { status, message } = JSON.parse(err.request.response);
         addToast({
           type: 'error',
           title: 'Falha na operação',
-          description:
-            'Somente o organizador do churrasco pode alterar essa informação',
+          description: message,
         });
       }
     },

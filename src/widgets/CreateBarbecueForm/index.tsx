@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react';
-import { FiUser, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -8,7 +7,6 @@ import { FaClock, FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -45,18 +43,6 @@ const CreateBarbecueForm: React.FC<Props> = ({ handleRefresh }) => {
           description: Yup.string()
             .required('O que vai rolar no churras?')
             .max(144),
-          hour: Yup.number()
-            .required('Que horas vai ser??')
-            .min(12, 'Pelo menos depois do meio dia né ;)')
-            .max(22, 'Pode ir até tarde, mas tem que começar antes das 22h ;)'),
-          mealPrice: Yup.number()
-            .required('Quantos $$ pra comer?')
-            .min(0, 'Vai pagar pros convidados irem?')
-            .max(50, 'Aloou? Vai ter rodízio de entrecot?'),
-          drinksPrice: Yup.number()
-            .required('Quantos $$ pra beber?')
-            .min(0, 'Mais barato que de graça não dá ;)')
-            .max(50, 'Vai ter caipirinha de Absolute??'),
         });
 
         await schema.validate(data, {
