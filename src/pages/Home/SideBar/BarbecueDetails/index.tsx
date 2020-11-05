@@ -57,8 +57,6 @@ const BarbecueDetails: React.FC = () => {
   );
 
   const { content } = useDate();
-  const { user } = useAuth();
-  console.log('bd', content);
 
   const month = String(content.date.getMonth() + 1).padStart(2, '0');
   const day = String(content.date.getDate()).padStart(2, '0');
@@ -92,7 +90,7 @@ const BarbecueDetails: React.FC = () => {
       {barbecue && (
         <Barbecue barbecue={barbecue} handleRefresh={handleRefresh} />
       )}
-      {!barbecue && <CreateBarbecueForm />}
+      {!barbecue && <CreateBarbecueForm handleRefresh={handleRefresh} />}
     </Container>
   );
 };

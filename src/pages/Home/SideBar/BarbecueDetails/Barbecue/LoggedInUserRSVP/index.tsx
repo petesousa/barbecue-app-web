@@ -35,6 +35,8 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const [willDrink, setWillDrink] = useState(userRSVP.willDrink);
   const [hasPaid, setHasPaid] = useState(userRSVP.hasPaid);
 
+  console.log(hasPaid);
+
   const { addToast } = useToast();
 
   const handleCancelRSVP = useCallback(async () => {
