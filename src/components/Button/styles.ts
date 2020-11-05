@@ -1,4 +1,4 @@
-import { shade } from 'polished';
+import { transparentize } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.button`
@@ -12,11 +12,11 @@ export const Container = styled.button`
   height: 56px;
   font-weight: bold;
   font-size: 18px;
-  margin-top: 28px;
+  margin-top: 20px;
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${shade(0.8, '#ff5500')};
-    color: #ff5500;
+    background: ${transparentize(0.2, '#232129')};
+    color: #fff;
   }
 `;
