@@ -35,6 +35,10 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const handleCancelRSVP = useCallback(async () => {
     try {
       await api.delete(`/barbecue-rsvp/${userRSVP.id}`);
+      addToast({
+        type: 'success',
+        title: 'Foi! Operação concluída :)',
+      });
       handleRefresh();
     } catch (err) {
       const { message } = JSON.parse(err.request.response);
@@ -49,6 +53,10 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const handleChangeRSVPWillEat = useCallback(async () => {
     try {
       await api.put(`/barbecue-rsvp/${userRSVP.id}/meal`);
+      addToast({
+        type: 'success',
+        title: 'Foi! Operação concluída :)',
+      });
       setWillEat(!willEat);
       handleRefresh();
     } catch (err) {
@@ -64,6 +72,10 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const handleChangeRSVPWillDrink = useCallback(async () => {
     try {
       await api.put(`/barbecue-rsvp/${userRSVP.id}/drinks`);
+      addToast({
+        type: 'success',
+        title: 'Foi! Operação concluída :)',
+      });
       setWillDrink(!willDrink);
       handleRefresh();
     } catch (err) {
@@ -79,6 +91,10 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   const handleChangeRSVPHasPaid = useCallback(async () => {
     try {
       await api.put(`/barbecue-rsvp/${userRSVP.id}/paid`);
+      addToast({
+        type: 'success',
+        title: 'Foi! Operação concluída :)',
+      });
       setHasPaid(!hasPaid);
       handleRefresh();
     } catch (err) {

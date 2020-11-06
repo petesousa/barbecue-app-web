@@ -31,6 +31,7 @@ export const DateUnavailable = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 `;
 
 export const WeekDay = styled.li`

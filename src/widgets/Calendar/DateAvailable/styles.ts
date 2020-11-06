@@ -9,8 +9,10 @@ export const Container = styled.div`
   }
   cursor: pointer;
   color: ${shade(0.4, '#d7f171')};
+  box-shadow: 1px 2px 3px 0px rgba(125, 125, 125, 0.3);
 
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
 `;

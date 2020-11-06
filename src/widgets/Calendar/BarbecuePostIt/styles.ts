@@ -11,10 +11,11 @@ export const Container = styled.li`
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
 
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   cursor: pointer;
   color: ${shade(0.4, '#f6e4e2')};
+  box-shadow: 1px 2px 3px 0px rgba(125, 125, 125, 0.3);
 `;
 
 export const PostItHeader = styled.div``;

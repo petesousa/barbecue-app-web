@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   h3 {
-    margin-bottom: 7px;
-    width: 200px;
+    color: #282828;
+    font-weight: bold;
   }
 
   div {
@@ -12,7 +12,9 @@ export const Container = styled.div`
     justify-content: space-between;
 
     h4 {
+      font-size: 13px;
       width: 160px;
+      color: #555;
     }
   }
 `;

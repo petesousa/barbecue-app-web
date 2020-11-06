@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  box-shadow: 0px 2px 3px 0px rgba(125, 125, 125, 0.3);
   svg {
     cursor: pointer;
   }

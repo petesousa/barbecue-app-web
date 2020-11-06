@@ -5,7 +5,7 @@ import LoggedInUserRSVP from './LoggedInUserRSVP';
 import OtherUsers from './OtherUsers';
 import RSVPList from './RSVPList';
 
-import { Container, PriceDetails } from './styles';
+import { Container, PriceDetails, RsvpProgress } from './styles';
 import LoggedInUserCreateRSVP from './LoggedInUserCreateRSVP';
 
 interface BarbecueRSVPDetailsDTO {
@@ -71,7 +71,8 @@ const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh }) => {
     <Container>
       <h1>{barbecue.title}</h1>
       <h3>{`${date.toLocaleDateString('pt-BR')}, às ${barbecue.hour}h`}</h3>
-      <h4>{`Organizado por ${barbecue.organizer}`}</h4>
+      <h5>{`Organizado por ${barbecue.organizer}`}</h5>
+      <h4>O que vai rolar?</h4>
       <p>{barbecue.description}</p>
 
       <PriceDetails>
@@ -88,13 +89,19 @@ const Barbecue: React.FC<Props> = ({ barbecue, handleRefresh }) => {
 
       {barbecue.rsvp && (
         <>
-          <div>
-            {`${barbecue.rsvp?.rsvpProgress?.rsvp} de ${totalInvited} confirmados`}
-          </div>
+          <RsvpProgress>
+            <span>{`${barbecue.rsvp?.rsvpProgress?.rsvp} `}</span>
+            de
+            <span>{` ${totalInvited} `}</span>
+            confirmados
+          </RsvpProgress>
 
-          <div>
-            {`R$${barbecue.rsvp?.budgetProgress?.paid} de R$${barbecue.rsvp?.budgetProgress?.confirmed} arrecadados`}
-          </div>
+          <RsvpProgress>
+            <span>{`R$${barbecue.rsvp?.budgetProgress?.paid} `}</span>
+            de
+            <span>{` R$${barbecue.rsvp?.budgetProgress?.confirmed} `}</span>
+            arrecadados
+          </RsvpProgress>
 
           {barbecue.rsvp?.loggedInUserRSVP ? (
             <LoggedInUserRSVP
