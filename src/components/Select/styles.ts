@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 16px;
   width: 100%;
 
-  border: 3px solid #fff;
+  border: 3px solid #555;
   color: #666360;
 
   display: flex;
