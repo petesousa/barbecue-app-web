@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
-import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
+
 import Icon from '../../../../components/Icon';
 import { useToast } from '../../../../hooks/toast';
 import api from '../../../../service/api';
