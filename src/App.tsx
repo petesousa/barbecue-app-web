@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import GlobalStyles from './styles/global';
 
@@ -11,9 +11,9 @@ const App: React.FC = () => {
   return (
     <>
       <AppProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes />
-        </BrowserRouter>
+        </HashRouter>
       </AppProvider>
 
       <GlobalStyles />
