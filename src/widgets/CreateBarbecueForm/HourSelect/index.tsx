@@ -10,12 +10,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-const HourSelect: React.FC<SelectProps> = ({
-  name,
-  type,
-  icon: Icon,
-  ...rest
-}) => {
+const HourSelect: React.FC<SelectProps> = ({ name, type, ...rest }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
   const hours = [12, 15, 18, 19, 20, 21];
   const prices = [10, 20, 30, 40, 50];

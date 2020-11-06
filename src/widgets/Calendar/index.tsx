@@ -66,7 +66,7 @@ const Calendar: React.FC = () => {
         {['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'].map(weekDay => (
           <WeekDay>{weekDay}</WeekDay>
         ))}
-        {blanks.map(_ => {
+        {blanks.map(() => {
           return <Blank />;
         })}
         {monthDays.map(day => {

@@ -25,7 +25,6 @@ const DateProvider: React.FC = ({ children }) => {
 
   const setDisplayDate = useCallback(
     date => {
-      console.log(date);
       setDateSettings({
         date,
         month: dateSettings.month,

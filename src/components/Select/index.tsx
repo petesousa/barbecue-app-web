@@ -10,12 +10,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-const Select: React.FC<SelectProps> = ({
-  name,
-  items,
-  icon: Icon,
-  ...rest
-}) => {
+const Select: React.FC<SelectProps> = ({ name, items, ...rest }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
   const { fieldName, registerField } = useField(name);
 
