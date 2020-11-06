@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { FaCocktail, FaDrumstickBite } from 'react-icons/fa';
 import { FiDollarSign, FiUserCheck } from 'react-icons/fi';
+import Icon from '../../../../components/Icon';
 import { useToast } from '../../../../hooks/toast';
 import api from '../../../../service/api';
 
-import { Container } from './styles';
+import { Container, ToggleButton } from './styles';
 
 interface BarbecueRSVPDetailsDTO {
   id: string;
@@ -110,8 +111,13 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
   return (
     <Container>
       {isGoing && (
-        <div>
-          <FiUserCheck size={36} color="#20a020" />
+        <ToggleButton>
+          <Icon
+            name="user"
+            size={32}
+            color="#4791db"
+            onClick={handleCancelRSVP}
+          />
           <h5>
             <span>Você vai</span>
             <span>
@@ -120,67 +126,73 @@ const LoggedInUserRSVP: React.FC<Props> = ({ userRSVP, handleRefresh }) => {
               </button>
             </span>
           </h5>
-        </div>
+        </ToggleButton>
       )}
       {willEat ? (
-        <div>
-          <FaDrumstickBite
-            size={36}
-            color="#ffcc00"
+        <ToggleButton>
+          <Icon
+            name="food"
+            size={32}
+            color="#ffb74d"
             onClick={handleChangeRSVPWillEat}
           />
           <h5>Vai comer?</h5>
-        </div>
+        </ToggleButton>
       ) : (
-        <div>
-          <FaDrumstickBite
-            size={36}
+        <ToggleButton>
+          <Icon
+            name="food"
+            size={32}
             color="#ddd"
             onClick={handleChangeRSVPWillEat}
           />
 
           <h5>Vai comer?</h5>
-        </div>
+        </ToggleButton>
       )}
       {willDrink ? (
-        <div>
-          <FaCocktail
-            size={36}
-            color="#ff5500"
+        <ToggleButton>
+          <Icon
+            name="drinks"
+            size={32}
+            color="#e33371"
             onClick={handleChangeRSVPWillDrink}
           />
 
           <h5>Vai beber?</h5>
-        </div>
+        </ToggleButton>
       ) : (
-        <div>
-          <FaCocktail
-            size={36}
+        <ToggleButton>
+          <Icon
+            name="drinks"
+            size={32}
             color="#ddd"
             onClick={handleChangeRSVPWillDrink}
           />
 
           <h5>Vai beber?</h5>
-        </div>
+        </ToggleButton>
       )}
       {hasPaid ? (
-        <div>
-          <FiDollarSign
-            size={36}
-            color="#20a020"
+        <ToggleButton>
+          <Icon
+            name="dollar"
+            size={32}
+            color="#81c784"
             onClick={handleChangeRSVPHasPaid}
           />
           <h5>Você já pagou!</h5>
-        </div>
+        </ToggleButton>
       ) : (
-        <div>
-          <FiDollarSign
-            size={36}
+        <ToggleButton>
+          <Icon
+            name="dollar"
+            size={32}
             color="#ddd"
             onClick={handleChangeRSVPHasPaid}
           />
           <h5>Você ainda não pagou</h5>
-        </div>
+        </ToggleButton>
       )}
     </Container>
   );

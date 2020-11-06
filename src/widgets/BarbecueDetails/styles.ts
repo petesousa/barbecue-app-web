@@ -2,8 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 12px;
-  width: 90%;
   overflow: scroll;
+
+  width: 90%;
+  max-height: 100%;
+  display: flex;
 
   background: #424451;
   background: #fcfcfc;
